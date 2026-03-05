@@ -1,0 +1,30 @@
+Runners App
+
+Profile
+- runner_id ( PrimaryKey)
+- name
+- nic
+- phone
+- email
+- performannce_id
+
+
+Activity
+- activity_id (PrimaryKey)
+- runner_id
+- activity_name
+- duration_type (distance/time)
+- duration
+- event_id
+
+Events
+- event_id (PrimaryKey)
+- event_date 
+- event_location
+- event_title
+- event_description
+
+
+Performance
+- performannce_id (PrimaryKey)
+- vo2max

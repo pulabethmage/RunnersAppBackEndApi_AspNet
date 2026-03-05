@@ -1,0 +1,6 @@
+@RunnersAppBackEndApi_HostAddress = http://localhost:5030
+
+GET {{RunnersAppBackEndApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
