@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RunnersAppBackEndApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+70ea3d3e9cd4390fa8d2149cf955473cb9972e85")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("RunnersAppBackEndApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RunnersAppBackEndApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
