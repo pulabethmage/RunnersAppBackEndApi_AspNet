@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RunnersAppBackEndApi.Data;
 using RunnersAppBackEndApi.Models.Dto;
 using RunnersAppBackEndApi.Models.Entities;
+using RunnersAppBackEndApi.Services;
 
 namespace RunnersAppBackEndApi.Controllers
 {
@@ -10,49 +12,38 @@ namespace RunnersAppBackEndApi.Controllers
     [ApiController]
     public class ProfileController : ControllerBase
     {
-        private readonly ApplicationDbContext dbContext;
+        private readonly IProfileService profileService;
 
-        public ProfileController(ApplicationDbContext dbContext) { 
-           this.dbContext = dbContext;
+        public ProfileController(IProfileService profileService)
+        {
+            this.profileService = profileService;
         }
 
+        [Authorize]
         [HttpGet]
-        public IActionResult GetAllProfiles()
+        public async Task<IActionResult> GetAllProfiles()
         {
-            var allProfiles = dbContext.Profiles.ToList();
-
-            return Ok(allProfiles);
-
+            var profiles = await profileService.GetAllProfilesAsync();
+            return Ok(profiles);
         }
 
         [HttpGet]
         [Route("{id:int}")]
-        public IActionResult GetProfile(int id)
+        public async Task<IActionResult> GetProfile(int id)
         {
-            var profile = dbContext.Profiles.Find(id);
+            var profile = await profileService.GetProfileByIdAsync(id);
+
+            if (profile == null)
+                return NotFound();
 
             return Ok(profile);
         }
 
         [HttpPost]
-        public IActionResult AddProfile(AddProfileDto addProfileDto)
+        public async Task<IActionResult> AddProfile(AddProfileDto dto)
         {
-            var profileEntity = new Profile()
-            {
-                name = addProfileDto.name,
-                nic = addProfileDto.nic,
-                phone = addProfileDto.phone,
-                email = addProfileDto.email,
-                performannceid = addProfileDto.performannceid,
-                profilepic = addProfileDto.profilepic
-
-            };
-
-
-            dbContext.Add(profileEntity);
-            dbContext.SaveChanges();
-            return Ok(profileEntity);
-
+            var profile = await profileService.AddProfileAsync(dto);
+            return Ok(profile);
         }
     }
 }
